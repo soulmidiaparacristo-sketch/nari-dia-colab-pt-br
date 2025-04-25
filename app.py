@@ -124,16 +124,17 @@ def run_inference(
 
         # Use torch.inference_mode() context manager for the generation call
         with torch.inference_mode():
-            output_audio_np = model.generate(
-                text_input,
-                max_tokens=max_new_tokens,
-                cfg_scale=cfg_scale,
-                temperature=temperature,
-                top_p=top_p,
-                cfg_filter_top_k=cfg_filter_top_k,  # Pass the value here
-                use_torch_compile=False,  # Keep False for Gradio stability
-                audio_prompt=prompt_path_for_generate,
-            )
+            with torch.cuda.amp.autocast(enabled=False):  # Auto-patched for float32 on T4
+                output_audio_np = model.generate(
+                    text_input,
+                    max_tokens=max_new_tokens,
+                    cfg_scale=cfg_scale,
+                    temperature=temperature,
+                    top_p=top_p,
+                    cfg_filter_top_k=cfg_filter_top_k,  # Pass the value here
+                    use_torch_compile=False,  # Keep False for Gradio stability
+                    audio_prompt=prompt_path_for_generate,
+                )
 
         end_time = time.time()
         print(f"Generation finished in {end_time - start_time:.2f} seconds.")
@@ -235,8 +236,6 @@ with gr.Blocks(css=css) as demo:
             )
             audio_prompt_input = gr.Audio(
                 label="Audio Prompt (Optional)",
-                show_label=True,
-                sources=["upload", "microphone"],
                 type="numpy",
             )
             with gr.Accordion("Generation Parameters", open=False):
