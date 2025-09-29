@@ -38,7 +38,7 @@ print(f"Using device: {device}")
 print("Loading Nari model...")
 try:
     # Use the function from inference.py
-    model = Dia.load("dia_ptbr.safetensors", config="config.json", compute_dtype="float16", device=device)
+    model = Dia.from_pretrained("Soul25r/Diaptbr", compute_dtype="float16", device=device)
 except Exception as e:
     print(f"Error loading Nari model: {e}")
     raise
