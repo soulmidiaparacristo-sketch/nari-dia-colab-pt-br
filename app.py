@@ -240,6 +240,15 @@ with gr.Blocks(css=css) as demo:
                 type="numpy",
             )
             with gr.Accordion("Parâmetros de Geração", open=False):
+                 gr.Markdown("""
+**Expressões Sonoras Reconhecidas:**
+
+(laughs) (risos), (clears throat) (pigarreia), (sighs) (suspiro), (gasps) (ofega), (coughs) (tosse),  
+(singing) (cantando), (sings) (canta), (mumbles) (murmura), (beep) (bip), (groans) (geme),  
+(sniffs) (fungada), (claps) (bate palmas), (screams) (grita), (inhales) (inspira), (exhales) (expira),  
+(applause) (aplausos), (burps) (arrota), (humming) (cantarola), (sneezes) (espirra),  
+(chuckle) (risadinha), (whistles) (assobia)
+""")
                 max_new_tokens = gr.Slider(
                     label="Máximo de Tokens (Duração do Áudio)",
                     minimum=860,
