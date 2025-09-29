@@ -223,79 +223,81 @@ if example_txt_path.exists():
 
 
 # Build Gradio UI
+# Build Gradio UI
 with gr.Blocks(css=css) as demo:
-    gr.Markdown("# Nari Text-to-Speech Synthesis")
+    gr.Markdown("# Nari - Síntese de Voz a partir de Texto")
 
     with gr.Row(equal_height=False):
         with gr.Column(scale=1):
             text_input = gr.Textbox(
-                label="Input Text",
-                placeholder="Enter text here...",
+                label="Texto de Entrada",
+                placeholder="Digite o texto aqui...",
                 value=default_text,
-                lines=5,  # Increased lines
+                lines=5,
             )
             audio_prompt_input = gr.Audio(
-                label="Audio Prompt (Optional)",
+                label="Áudio de Referência (Opcional)",
                 type="numpy",
             )
-            with gr.Accordion("Generation Parameters", open=False):
+            with gr.Accordion("Parâmetros de Geração", open=False):
                 max_new_tokens = gr.Slider(
-                    label="Max New Tokens (Audio Length)",
+                    label="Máximo de Tokens (Duração do Áudio)",
                     minimum=860,
                     maximum=3072,
-                    value=model.config.data.audio_length,  # Use config default if available, else fallback
+                    value=model.config.data.audio_length,
                     step=50,
-                    info="Controls the maximum length of the generated audio (more tokens = longer audio).",
+                    info="Define o tempo máximo do áudio gerado. Quanto maior o valor, mais longo será o áudio.",
                 )
                 cfg_scale = gr.Slider(
-                    label="CFG Scale (Guidance Strength)",
+                    label="Escala CFG (Força de Adesão ao Texto)",
                     minimum=1.0,
                     maximum=5.0,
-                    value=3.0,  # Default from inference.py
+                    value=3.0,
                     step=0.1,
-                    info="Higher values increase adherence to the text prompt.",
+                    info="Controla o quanto o modelo segue fielmente o texto. Valores maiores aumentam a precisão.",
                 )
                 temperature = gr.Slider(
-                    label="Temperature (Randomness)",
+                    label="Temperatura (Aleatoriedade)",
                     minimum=1.0,
                     maximum=1.5,
-                    value=1.3,  # Default from inference.py
+                    value=1.3,
                     step=0.05,
-                    info="Lower values make the output more deterministic, higher values increase randomness.",
+                    info="Define o nível de criatividade na fala. Valores baixos geram fala mais robótica; altos, mais variada.",
                 )
                 top_p = gr.Slider(
-                    label="Top P (Nucleus Sampling)",
+                    label="Top P (Amostragem por Núcleo)",
                     minimum=0.80,
                     maximum=1.0,
-                    value=0.95,  # Default from inference.py
+                    value=0.95,
                     step=0.01,
-                    info="Filters vocabulary to the most likely tokens cumulatively reaching probability P.",
+                    info="Filtra as palavras mais prováveis até atingir a probabilidade P. Afeta naturalidade e controle.",
                 )
                 cfg_filter_top_k = gr.Slider(
-                    label="CFG Filter Top K",
+                    label="Filtro Top K para CFG",
                     minimum=15,
                     maximum=50,
                     value=30,
                     step=1,
-                    info="Top k filter for CFG guidance.",
+                    info="Limita a escolha às K palavras mais prováveis durante a geração. Valores maiores dão mais liberdade.",
                 )
                 speed_factor_slider = gr.Slider(
-                    label="Speed Factor",
+                    label="Fator de Velocidade",
                     minimum=0.8,
                     maximum=1.0,
                     value=0.94,
                     step=0.02,
-                    info="Adjusts the speed of the generated audio (1.0 = original speed).",
+                    info="Ajusta a velocidade da fala. 1.0 é a velocidade normal; valores menores tornam a fala mais lenta.",
                 )
 
-            run_button = gr.Button("Generate Audio", variant="primary")
+            run_button = gr.Button("Gerar Áudio", variant="primary")
 
         with gr.Column(scale=1):
             audio_output = gr.Audio(
-                label="Generated Audio",
+                label="Áudio Gerado",
                 type="numpy",
                 autoplay=False,
             )
+
 
     # Link button click to function
     run_button.click(
@@ -311,7 +313,7 @@ with gr.Blocks(css=css) as demo:
             speed_factor_slider,
         ],
         outputs=[audio_output],  # Add status_output here if using it
-        api_name="generate_audio",
+        api_name="generar_audio",
     )
 
     # Add examples (ensure the prompt path is correct or remove it if example file doesn't exist)
@@ -328,7 +330,7 @@ with gr.Blocks(css=css) as demo:
             0.94,
         ],
         [
-            "[S1] Open weights text to dialogue model. \n[S2] You get full control over scripts and voices. \n[S1] I'm biased, but I think we clearly won. \n[S2] Hard to disagree. (laughs) \n[S1] Thanks for listening to this demo. \n[S2] Try it now on Git hub and Hugging Face. \n[S1] If you liked our model, please give us a star and share to your friends. \n[S2] This was Nari Labs.",
+            "[S1] Você tem controle total sobre os roteiros e as vozes. Sou suspeito pra falar, mas acho que vencemos com folga. (laughs) Difícil discordar. Obrigado por ouvir esta demonstração. ",
             example_prompt_path if Path(example_prompt_path).exists() else None,
             3072,
             3.0,
