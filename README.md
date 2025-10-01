@@ -33,35 +33,7 @@ This version was created to:
 
 ---
 
-## 🧠 Model Background
-
-Dia is a 1.6B parameter text-to-speech model by [Nari Labs](https://github.com/nari-labs/dia). It supports:
-- Text-to-dialogue generation with `[S1]`, `[S2]` speaker tags
-- Non-verbal cues like `(laughs)`, `(coughs)`
-- Voice conditioning using uploaded audio
-
-Model weights are loaded via:
-```python
-Dia.from_pretrained("nari-labs/Dia-1.6B", device="cuda")
-```
-
----
-
-## 📁 Local Use Not Supported
-
-This repository is intentionally designed **only for use within Google Colab** to ensure a reliable and reproducible environment.  
-
-If you would like to use Dia locally or explore ongoing development, please refer to the [original Nari Labs repository](https://github.com/nari-labs/dia).
-
----
-
-## 🙋 Maintainer
-
-Created by **Anil Clifford**  
-→ Experimental projects via [@arcaneum](https://github.com/arcaneum)  
-→ Public releases via [EdenDigitalUK](https://github.com/EdenDigitalUK)  
-→ Professional work at [Eden Digital](https://www.edendigital.io)  
-→ [LinkedIn](https://www.linkedin.com/in/anilcliff/) · [Twitter/X](https://x.com/anil_clifford)
+Dia1.6b adapted to Portuguese. The model lost non-verbal signals and has minor flaws due to the mixed database between English and Brazilian Portuguese. However, it is a great starting point if you want to train your own fork.
 
 ---
 
