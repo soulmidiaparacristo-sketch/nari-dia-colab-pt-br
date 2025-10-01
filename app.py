@@ -240,7 +240,7 @@ with gr.Blocks(css=css) as demo:
                 type="numpy",
             )
             with gr.Accordion("Parâmetros de Geração", open=False):
-                 gr.Markdown("""
+    gr.Markdown("""
 **Expressões Sonoras Reconhecidas:**
 
 (laughs) (risos), (clears throat) (pigarreia), (sighs) (suspiro), (gasps) (ofega), (coughs) (tosse),  
@@ -249,54 +249,55 @@ with gr.Blocks(css=css) as demo:
 (applause) (aplausos), (burps) (arrota), (humming) (cantarola), (sneezes) (espirra),  
 (chuckle) (risadinha), (whistles) (assobia)
 """)
-                max_new_tokens = gr.Slider(
-                    label="Máximo de Tokens (Duração do Áudio)",
-                    minimum=860,
-                    maximum=3072,
-                    value=model.config.data.audio_length,
-                    step=50,
-                    info="Define o tempo máximo do áudio gerado. Quanto maior o valor, mais longo será o áudio.",
-                )
-                cfg_scale = gr.Slider(
-                    label="Escala CFG (Força de Adesão ao Texto)",
-                    minimum=1.0,
-                    maximum=5.0,
-                    value=3.0,
-                    step=0.1,
-                    info="Controla o quanto o modelo segue fielmente o texto. Valores maiores aumentam a precisão.",
-                )
-                temperature = gr.Slider(
-                    label="Temperatura (Aleatoriedade)",
-                    minimum=1.0,
-                    maximum=1.5,
-                    value=1.3,
-                    step=0.05,
-                    info="Define o nível de criatividade na fala. Valores baixos geram fala mais robótica; altos, mais variada.",
-                )
-                top_p = gr.Slider(
-                    label="Top P (Amostragem por Núcleo)",
-                    minimum=0.80,
-                    maximum=1.0,
-                    value=0.95,
-                    step=0.01,
-                    info="Filtra as palavras mais prováveis até atingir a probabilidade P. Afeta naturalidade e controle.",
-                )
-                cfg_filter_top_k = gr.Slider(
-                    label="Filtro Top K para CFG",
-                    minimum=15,
-                    maximum=50,
-                    value=30,
-                    step=1,
-                    info="Limita a escolha às K palavras mais prováveis durante a geração. Valores maiores dão mais liberdade.",
-                )
-                speed_factor_slider = gr.Slider(
-                    label="Fator de Velocidade",
-                    minimum=0.8,
-                    maximum=1.0,
-                    value=0.94,
-                    step=0.02,
-                    info="Ajusta a velocidade da fala. 1.0 é a velocidade normal; valores menores tornam a fala mais lenta.",
-                )
+    max_new_tokens = gr.Slider(
+        label="Máximo de Tokens (Duração do Áudio)",
+        minimum=860,
+        maximum=3072,
+        value=model.config.data.audio_length,
+        step=50,
+        info="Define o tempo máximo do áudio gerado. Quanto maior o valor, mais longo será o áudio.",
+    )
+    cfg_scale = gr.Slider(
+        label="Escala CFG (Força de Adesão ao Texto)",
+        minimum=1.0,
+        maximum=5.0,
+        value=3.0,
+        step=0.1,
+        info="Controla o quanto o modelo segue fielmente o texto. Valores maiores aumentam a precisão.",
+    )
+    temperature = gr.Slider(
+        label="Temperatura (Aleatoriedade)",
+        minimum=1.0,
+        maximum=1.5,
+        value=1.3,
+        step=0.05,
+        info="Define o nível de criatividade na fala. Valores baixos geram fala mais robótica; altos, mais variada.",
+    )
+    top_p = gr.Slider(
+        label="Top P (Amostragem por Núcleo)",
+        minimum=0.80,
+        maximum=1.0,
+        value=0.95,
+        step=0.01,
+        info="Filtra as palavras mais prováveis até atingir a probabilidade P. Afeta naturalidade e controle.",
+    )
+    cfg_filter_top_k = gr.Slider(
+        label="Filtro Top K para CFG",
+        minimum=15,
+        maximum=50,
+        value=30,
+        step=1,
+        info="Limita a escolha às K palavras mais prováveis durante a geração. Valores maiores dão mais liberdade.",
+    )
+    speed_factor_slider = gr.Slider(
+        label="Fator de Velocidade",
+        minimum=0.8,
+        maximum=1.0,
+        value=0.94,
+        step=0.02,
+        info="Ajusta a velocidade da fala. 1.0 é a velocidade normal; valores menores tornam a fala mais lenta.",
+    )
+
 
             run_button = gr.Button("Gerar Áudio", variant="primary")
 
