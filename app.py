@@ -236,7 +236,7 @@ with gr.Blocks(css=css) as demo:
             )
             audio_prompt_input = gr.Audio(
                 label="Audio Prompt (Optional)",
-                type="numpy",
+                type="filepath",
             )
             with gr.Accordion("Parâmetros de Geração", open=False):
                 gr.Markdown("""
