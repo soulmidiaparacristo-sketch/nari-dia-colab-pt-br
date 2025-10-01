@@ -70,7 +70,7 @@ def run_inference(
     try:
         prompt_path_for_generate = None
         if audio_prompt_input is not None:
-            sr, audio_data = audio_prompt_input
+            audio_data, sr = sf.read(audio_prompt_input)
             # Check if audio_data is valid
             if audio_data is None or audio_data.size == 0 or audio_data.max() == 0:  # Check for silence/empty
                 gr.Warning("Audio prompt seems empty or silent, ignoring prompt.")
