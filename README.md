@@ -1,39 +1,41 @@
 # 🎤 Nari Dia TTS — Colab Edition (Float32 & T4-Compatible)
 
-A Colab-only version of the Nari Labs Dia model, specifically designed for seamless execution on T4 GPUs within Google Colab. This fork removes compatibility issues with AMP and Gradio v5, and includes a pre-configured notebook for one-click voice generation.
+Uma versão exclusiva para Colab do modelo Dia da Nari Labs, projetada especificamente para execução perfeita em GPUs T4 dentro do Google Colab. Esta bifurcação elimina problemas de compatibilidade com AMP e Gradio v5 e inclui um notebook pré-configurado para geração de voz com um clique.
 
 ---
 
 ## 🚀 Quickstart (Run on Google Colab)
 
-Click below to launch the latest notebook:
+Clique abaixo para iniciar o notebook mais recente:
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/soulmidiaparacristo-sketch/nari-dia-colab-pt-br/blob/main/Nari_Dia_Colab.ipynb)
 
 ---
 
-## ✅ Why This Fork?
+## ✅ Por que este fork?
 
-This version was created to:
+Esta versão foi criada para:
 
-- Run reliably in **Google Colab** using **T4 GPUs**
-- Avoid dtype errors (`bfloat16` vs `float32`) by disabling AMP
-- Ensure **Gradio UI works with v5+** (no deprecated args)
-- Provide a clean, reproducible `.ipynb` notebook designed exclusively for Google Colab
+- Execute de forma confiável no **Google Colab** usando **GPUs T4**
+- Evite erros de dtype (`bfloat16` vs `float32`) desabilitando o AMP
+- Garanta que a **IU do Gradio funcione com a versão 5+** (sem argumentos obsoletos)
+- Forneça um notebook `.ipynb` limpo e reproduzível, projetado exclusivamente para o Google Colab
 
 ---
 
-## 📄 What's Included
+## 📄 O que está incluído
 
-| File | Purpose |
+| Arquivo | Finalidade |
 |------|---------|
-| `app.py` | Cleaned up and modified for Colab |
-| `Nari_Dia_Colab.ipynb` | Pre-configured notebook for inference |
-| `README.md` | This file |
+| `app.py` | Limpo e modificado para Colab |
+| `Nari_Dia_Colab.ipynb` | Caderno pré-configurado para inferência |
+| `README.md` | Este arquivo |
 
 ---
 
-Dia1.6b adapted to Portuguese. The model lost non-verbal signals and has minor flaws due to the mixed database between English and Brazilian Portuguese. However, it is a great starting point if you want to train your own fork.
+Dia1.6b adaptado para o português. O modelo perdeu sinais não verbais e apresenta pequenas falhas devido ao banco de dados misto entre inglês e português brasileiro. No entanto, é um ótimo ponto de partida se você quiser treinar seu próprio fork e testa em colab, alem de usar o modelo Dia pronto com vozes naturais com pequenos ajuste de escrita romanizados.
+agradecimentos: https://github.com/arcaneum/nari-dia-colab & https://huggingface.co/Alissonerdx/Dia1.6-pt_BR-v1
+
 
 ---
 
