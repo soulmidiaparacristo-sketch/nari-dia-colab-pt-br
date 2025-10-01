@@ -123,16 +123,16 @@ def run_inference(
 
         start_time = time.time()
 # Apply fixed seed if provided (seguro contra None/NaN/valores inválidos)
-try:
-    if seed is not None and not np.isnan(seed):
-        s = int(seed)
-        torch.manual_seed(s)
-        np.random.seed(s)
-        print(f"Using fixed seed: {s}")
-    else:
-        print("No fixed seed provided, using random behavior.")
-except Exception as e:
-    print(f"Warning: failed to set seed ({seed}): {e}")
+        try:
+            if seed is not None and not np.isnan(seed):
+                s = int(seed)
+                torch.manual_seed(s)
+                np.random.seed(s)
+                print(f"Using fixed seed: {s}")
+            else:
+                print("No fixed seed provided, using random behavior.")
+        except Exception as e:
+            print(f"Warning: failed to set seed ({seed}): {e}")
 
 
         
