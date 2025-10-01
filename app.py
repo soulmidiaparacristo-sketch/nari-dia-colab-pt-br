@@ -53,6 +53,7 @@ def run_inference(
     top_p: float,
     cfg_filter_top_k: int,
     speed_factor: float,
+    seed: Optional[float] = None,
 ):
     """
     Runs Nari inference using the globally loaded model and provided inputs.
@@ -121,7 +122,18 @@ def run_inference(
         # 3. Run Generation
 
         start_time = time.time()
+# Apply fixed seed if provided
+        try:
+            if seed is not None and (not np.isnan(seed)):
+                torch.manual_seed(int(seed))
+                np.random.seed(int(seed))
+                print(f"Using fixed seed: {int(seed)}")
+            else:
+                print("No fixed seed provided, using random behavior.")
+        except Exception as seed_e:
+            print(f"Warning: failed to set seed ({seed}): {seed_e}")
 
+        
         # Use torch.inference_mode() context manager for the generation call
         with torch.inference_mode():
             with torch.cuda.amp.autocast(enabled=False):  # Auto-patched for float32 on T4
@@ -238,6 +250,9 @@ with gr.Blocks(css=css) as demo:
                 label="Audio Prompt (Optional)",
                 type="filepath",
             )
+            
+            seed_input = gr.Number(label="Seed do Falante (deixe em branco para aleatório)", value=42, precision=0)
+            
             with gr.Accordion("Parâmetros de Geração", open=False):
                 gr.Markdown("""
 **Expressões Sonoras Reconhecidas:**
@@ -319,6 +334,7 @@ with gr.Blocks(css=css) as demo:
             top_p,
             cfg_filter_top_k,
             speed_factor_slider,
+            seed_input,   # <-- ADICIONADO
         ],
         outputs=[audio_output],  # Add status_output here if using it
         api_name="generar_audio",
