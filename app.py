@@ -223,8 +223,23 @@ if example_txt_path.exists():
 
 
 # Build Gradio UI
-with gr.Accordion("Parâmetros de Geração", open=False):
-    gr.Markdown("""
+with gr.Blocks(css=css) as demo:
+    gr.Markdown("# Nari Text-to-Speech Synthesis")
+
+    with gr.Row(equal_height=False):
+        with gr.Column(scale=1):
+            text_input = gr.Textbox(
+                label="Input Text",
+                placeholder="Enter text here...",
+                value=default_text,
+                lines=5,  # Increased lines
+            )
+            audio_prompt_input = gr.Audio(
+                label="Audio Prompt (Optional)",
+                type="numpy",
+            )
+            with gr.Accordion("Parâmetros de Geração", open=False):
+                gr.Markdown("""
 **Expressões Sonoras Reconhecidas:**
 
 (laughs) (risos), (clears throat) (pigarreia), (sighs) (suspiro), (gasps) (ofega), (coughs) (tosse),  
@@ -233,7 +248,7 @@ with gr.Accordion("Parâmetros de Geração", open=False):
 (applause) (aplausos), (burps) (arrota), (humming) (cantarola), (sneezes) (espirra),  
 (chuckle) (risadinha), (whistles) (assobia)
 """)
-    max_new_tokens = gr.Slider(
+                max_new_tokens = gr.Slider(
         label="Máximo de Tokens (Duração do Áudio)",
         minimum=860,
         maximum=3072,
@@ -241,7 +256,7 @@ with gr.Accordion("Parâmetros de Geração", open=False):
         step=50,
         info="Define o tempo máximo do áudio gerado. Quanto maior o valor, mais longo será o áudio.",
     )
-    cfg_scale = gr.Slider(
+                cfg_scale = gr.Slider(
         label="Escala CFG (Força de Adesão ao Texto)",
         minimum=1.0,
         maximum=5.0,
@@ -249,7 +264,7 @@ with gr.Accordion("Parâmetros de Geração", open=False):
         step=0.1,
         info="Controla o quanto o modelo segue fielmente o texto. Valores maiores aumentam a precisão.",
     )
-    temperature = gr.Slider(
+                temperature = gr.Slider(
         label="Temperatura (Aleatoriedade)",
         minimum=1.0,
         maximum=1.5,
@@ -257,7 +272,7 @@ with gr.Accordion("Parâmetros de Geração", open=False):
         step=0.05,
         info="Define o nível de criatividade na fala. Valores baixos geram fala mais robótica; altos, mais variada.",
     )
-    top_p = gr.Slider(
+                top_p = gr.Slider(
         label="Top P (Amostragem por Núcleo)",
         minimum=0.80,
         maximum=1.0,
@@ -265,7 +280,7 @@ with gr.Accordion("Parâmetros de Geração", open=False):
         step=0.01,
         info="Filtra as palavras mais prováveis até atingir a probabilidade P. Afeta naturalidade e controle.",
     )
-    cfg_filter_top_k = gr.Slider(
+                cfg_filter_top_k = gr.Slider(
         label="Filtro Top K para CFG",
         minimum=15,
         maximum=50,
@@ -273,7 +288,7 @@ with gr.Accordion("Parâmetros de Geração", open=False):
         step=1,
         info="Limita a escolha às K palavras mais prováveis durante a geração. Valores maiores dão mais liberdade.",
     )
-    speed_factor_slider = gr.Slider(
+                speed_factor_slider = gr.Slider(
         label="Fator de Velocidade",
         minimum=0.8,
         maximum=1.0,
@@ -291,7 +306,6 @@ with gr.Accordion("Parâmetros de Geração", open=False):
                 type="numpy",
                 autoplay=False,
             )
-
 
     # Link button click to function
     run_button.click(
