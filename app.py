@@ -223,23 +223,7 @@ if example_txt_path.exists():
 
 
 # Build Gradio UI
-# Build Gradio UI
-with gr.Blocks(css=css) as demo:
-    gr.Markdown("# Nari - Síntese de Voz a partir de Texto")
-
-    with gr.Row(equal_height=False):
-        with gr.Column(scale=1):
-            text_input = gr.Textbox(
-                label="Texto de Entrada",
-                placeholder="Digite o texto aqui...",
-                value=default_text,
-                lines=5,
-            )
-            audio_prompt_input = gr.Audio(
-                label="Áudio de Referência (Opcional)",
-                type="numpy",
-            )
-            with gr.Accordion("Parâmetros de Geração", open=False):
+with gr.Accordion("Parâmetros de Geração", open=False):
     gr.Markdown("""
 **Expressões Sonoras Reconhecidas:**
 
