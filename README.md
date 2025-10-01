@@ -8,7 +8,7 @@ A Colab-only version of the Nari Labs Dia model, specifically designed for seaml
 
 Click below to launch the latest notebook:
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/arcaneum/nari-dia-colab/blob/main/Nari_Dia_Colab.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/soulmidiaparacristo-sketch/nari-dia-colab-pt-br/blob/main/Nari_Dia_Colab.ipynb)
 
 ---
 
